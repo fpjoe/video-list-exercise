@@ -1,7 +1,7 @@
 # video-list-exercise
 Exercise: API for retrieving a simple list of videos using Ruby on Rails and PostgreSQL.
 
-# To Run
+# To run
 
 Visit: https://video-list-exercise.herokuapp.com/videos
 
@@ -18,6 +18,10 @@ Examples:
 * https://video-list-exercise.herokuapp.com/videos?song_title=Open+Heart
 * https://video-list-exercise.herokuapp.com/videos?artist_title=Bobby+Long&city_title=Austin
 * https://video-list-exercise.herokuapp.com/videos?city_title=Austin&page=2&per_page=5
+
+# Known issues
+
+* Results not returning artist and city info, only video and song info (serialization issue?)
 
 # Things I might do next if I had time:
 
