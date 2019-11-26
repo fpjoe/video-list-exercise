@@ -15,6 +15,8 @@ class VideoListService
 
     apply_city_title
 
+    apply_sort
+
     serialized_videos
   end
 
@@ -54,6 +56,10 @@ class VideoListService
         @videos.
           where("lower(cities.title) = ?",clean_param(@city_title))
     end
+  end
+
+  def apply_sort
+    @videos = @videos.order('videos.video_uid asc')
   end
 
   def clean_param(value)
