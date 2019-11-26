@@ -15,6 +15,9 @@
 /log
 /tmp
 
+# Ignore examples file written to by rspec
+/spec/examples.txt
+
 # Ignore RubyMine files
 .idea/
 
