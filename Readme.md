@@ -12,6 +12,13 @@ Possible parameters (all parameters are **optional**):
 * page = page number, defaults to 1
 * per_page = number per page, defaults to 25
 
+Results are returned in order of video_uid ascending.
+
+Examples:
+* https://video-list-exercise.herokuapp.com/videos?song_title=Open+Heart
+* https://video-list-exercise.herokuapp.com/videos?artist_title=Bobby+Long&city_title=Austin
+* https://video-list-exercise.herokuapp.com/videos?city_title=Austin&page=2&per_page=5
+
 Things I might do next if I had time:
 
 * Add **sorting**: optionally pass sort parameter, defaulting to video_uid ascending, e.g. 'sort=video_uid_A'
