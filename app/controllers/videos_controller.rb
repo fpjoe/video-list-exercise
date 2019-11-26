@@ -17,11 +17,15 @@ class VideosController < ApplicationController
 
   def index_result(videos)
     {
-      videos:           paginate_list(videos),
+      videos:           serialize_videos(paginate_list(videos)),
       total_num_videos: videos.count,
       page:             get_page,
       per_page:         get_per_page
     }
+  end
+
+  def serialize_videos(videos)
+    videos.map{ |v| VideoSerializer.new(v).as_json }
   end
 
   def paginate_list(objects)

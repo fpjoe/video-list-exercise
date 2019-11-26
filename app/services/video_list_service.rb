@@ -17,20 +17,20 @@ class VideoListService
 
     apply_sort
 
-    serialized_videos
+    @videos
   end
 
   private
 
   def run_base_query
     if @artist_title.blank? && @city_title.blank?
-      @videos = Video.all.joins(:song)
+      @videos = Video.all.joins(:song).includes([:song])
     elsif @artist_title.present? && @city_title.blank?
-      @videos = Video.all.joins(song: :artist)
+      @videos = Video.all.joins(song: :artist).includes([:song])
     elsif @artist_title.blank? && @city_title.present?
-      @videos = Video.all.joins(song: :city)
+      @videos = Video.all.joins(song: :city).includes([:song])
     elsif @artist_title.present? && @city_title.present?
-      @videos = Video.all.joins(song: [:artist,:city])
+      @videos = Video.all.joins(song: [:artist,:city]).includes([:song])
     end
   end
 
@@ -64,10 +64,6 @@ class VideoListService
 
   def clean_param(value)
     value.strip.downcase
-  end
-
-  def serialized_videos
-    @videos.map{ |v| VideoSerializer.new(v).as_json }
   end
   
 end
