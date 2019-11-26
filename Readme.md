@@ -25,5 +25,9 @@ Examples:
 
 # Things I might do next if I had time:
 
-* Add **sorting**: optionally pass sort parameter, defaulting to video_uid ascending, e.g. 'sort=video_uid_A'
-* Add **authentication**: pass in an API key
+* Add **API versioning**: current version of API should be v1
+* Add **sorting**: pass optional sort parameter, defaulting to video_uid ascending, e.g. 'sort=video_uid_A'
+* Add **authentication**: pass required API key
+* DRY work on seeds.rb, videos_spec.rb
+* Redirect root url (/) to API url (/videos)
+* Return error if unrecognized parameter passed
