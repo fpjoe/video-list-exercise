@@ -30,6 +30,9 @@ gem 'awesome_print'
 # For parsing/generating JSON within Ruby
 gem 'json'
 
+# For serializing objects
+gem 'active_model_serializers'
+
 # For pagination of results of any kind
 gem 'will_paginate', '~> 3.0'
 

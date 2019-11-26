@@ -5,7 +5,8 @@ RSpec.describe "Video list API", type: :request do
   describe 'GET /todos' do
 
     before(:each) do
-      20.times { Fabricate(:video) }
+      19.times { Fabricate(:video) }
+      Fabricate(:video_with_custom_titles)
     end
 
     it "returns http status 200" do
@@ -21,31 +22,39 @@ RSpec.describe "Video list API", type: :request do
 
       response_json = JSON.parse(response.body)
 
-      expect(response_json.length).to eq 20
+      expect(response_json["total_num_videos"]).to eq 20
+    end
+
+    it "returns a list of 5 videos, with 5 videos per page requested" do
+      get '/videos?per_page=5'
+
+      response_json = JSON.parse(response.body)
+
+      expect(response_json["videos"].length).to eq 5
     end
 
     it "returns a list of videos matching a particular song name" do
-      get '/videos?song_title=Happy+Days+4'
+      get '/videos?song_title=Fly+Me+To+The+Moon'
 
       response_json = JSON.parse(response.body)
 
-      expect(response_json.length).to eq 1
+      expect(response_json["total_num_videos"]).to eq 1
     end
 
     it "returns a list of videos matching a particular artist name" do
-      get '/videos?artist_title=Dean+Martin+6'
+      get '/videos?artist_title=Sinatra+Lives'
 
       response_json = JSON.parse(response.body)
 
-      expect(response_json.length).to eq 1
+      expect(response_json["total_num_videos"]).to eq 1
     end
 
     it "returns a list of videos matching a particular city name" do
-      get '/videos?city_title=Chicago+12'
+      get '/videos?city_title=Chicago+Is+My+Kind+Of+Town'
 
       response_json = JSON.parse(response.body)
 
-      expect(response_json.length).to eq 1
+      expect(response_json["total_num_videos"]).to eq 1
     end
 
     it "returns a list of 0 videos matching a particular song name we know doesn't exist" do
@@ -53,7 +62,7 @@ RSpec.describe "Video list API", type: :request do
 
       response_json = JSON.parse(response.body)
 
-      expect(response_json.length).to eq 0
+      expect(response_json["total_num_videos"]).to eq 0
     end
 
     it "returns a list of 0 videos matching a particular artist name we know doesn't exist" do
@@ -61,7 +70,7 @@ RSpec.describe "Video list API", type: :request do
 
       response_json = JSON.parse(response.body)
 
-      expect(response_json.length).to eq 0
+      expect(response_json["total_num_videos"]).to eq 0
     end
 
     it "returns a list of 0 videos matching a particular city name we know doesn't exist" do
@@ -69,7 +78,7 @@ RSpec.describe "Video list API", type: :request do
 
       response_json = JSON.parse(response.body)
 
-      expect(response_json.length).to eq 0
+      expect(response_json["total_num_videos"]).to eq 0
     end
 
   end
